@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'no_hp',
+        'role',
+        'id_kamar',
     ];
 
     /**
@@ -42,4 +45,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function kamar()
+    {
+        return $this->belongsTo(Kamar::class, 'id_kamar');
+    }
 }
