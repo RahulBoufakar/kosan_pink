@@ -9,6 +9,30 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
+        <!-- No Hp -->
+        <div class="mt-4">
+            <x-input-label for="no_hp" :value="__('no_hp')" />
+            <x-text-input id="no_hp" class="block mt-1 w-full" type="text" name="no_hp" :value="old('no_hp')" required autofocus autocomplete="no_hp" />
+            <x-input-error :messages="$errors->get('no_hp')" class="mt-2" />
+        </div>
+
+        <!-- Role -->
+        <x-text-input id="role" class="hidden" type="text" name="role" value="user" hidden aria-hidden="true"/>
+        
+        <!-- id_kamar -->
+        <div class="mt-4">
+            <x-input-label for="id_kamar" :value="__('Kamar')" />
+            <select id="id_kamar" name="id_kamar" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" required>
+                <option value="">{{ __('Pilih Kamar') }}</option>
+                @foreach(\App\Models\Kamar::where('status', 'tersedia')->get() as $kamar)
+                    <option value="{{ $kamar->id }}" {{ old('id_kamar') == $kamar->id ? 'selected' : '' }}>
+                        {{ $kamar->nama_kamar ?? 'Kamar '.$kamar->id }}
+                    </option>
+                @endforeach
+            </select>
+            <x-input-error :messages="$errors->get('id_kamar')" class="mt-2" />
+        </div>
+
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
