@@ -21,16 +21,16 @@
         
         <!-- id_kamar -->
         <div class="mt-4">
-            <x-input-label for="id_kamar" :value="__('Kamar')" />
-            <select id="id_kamar" name="id_kamar" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" required>
+            <x-input-label for="kamar_id" :value="__('Kamar')" />
+            <select id="kamar_id" name="kamar_id" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" required>
                 <option value="">{{ __('Pilih Kamar') }}</option>
-                @foreach(\App\Models\Kamar::where('status', 'tersedia')->get() as $kamar)
-                    <option value="{{ $kamar->id }}" {{ old('id_kamar') == $kamar->id ? 'selected' : '' }}>
+                @foreach($kamars as $kamar)
+                    <option value="{{ $kamar->id }}" {{ old('kamar_id') == $kamar->id ? 'selected' : '' }}>
                         {{ $kamar->nama_kamar ?? 'Kamar '.$kamar->id }}
                     </option>
                 @endforeach
             </select>
-            <x-input-error :messages="$errors->get('id_kamar')" class="mt-2" />
+            <x-input-error :messages="$errors->get('kamar_id')" class="mt-2" />
         </div>
 
         <!-- Email Address -->

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Models\kamar;
 
 class RegisteredUserController extends Controller
 {
@@ -20,7 +21,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $kamars = kamar::where('status', 'tersedia')->get();
+        return view('auth.register', compact('kamars'));
     }
 
     /**
@@ -37,7 +39,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['required', 'in:user,admin'],
             'no_hp' => ['required', 'string', 'max:15'],
-            'id_kamar' => ['nullable', 'exists:kamar,id'],
+            'kamar_id' => ['nullable', 'exists:kamar,id'],
         ]);
 
         $user = User::create([
@@ -48,6 +50,12 @@ class RegisteredUserController extends Controller
             'no_hp' => $request->no_hp,
             'kamar_id' => $request->role === 'user' ? $request->id_kamar : null,
         ]);
+
+        $kamar = kamar::find($request->kamar_id);
+        if ($kamar && $request->role === 'user') {
+            $kamar->status = 'penuh';
+            $kamar->save();
+        }
 
         event(new Registered($user));
 
