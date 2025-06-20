@@ -50,4 +50,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Kamar::class, 'id_kamar');
     }
+
+    public function tagihan(){
+        return $this->hasMany(Tagihan::class, 'user_id');
+    }
 }

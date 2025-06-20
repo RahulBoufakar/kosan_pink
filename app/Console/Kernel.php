@@ -12,7 +12,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        // Menjadwalkan perintah untuk menambahkan tagihan bulanan setiap bulan pada tanggal 17 pukul 05:00
+        // $schedule->command('tambah-tagihan')->monthlyOn(17, '05:00')->timezone('Asia/Jakarta');
+        $schedule->command('tambah-tagihan')->everyMinute()->timezone('Asia/Jakarta');
     }
 
     /**
