@@ -21,8 +21,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        $kamars = kamar::where('status', 'tersedia')->get();
-        return view('auth.register', compact('kamars'));
+        $availableRooms = kamar::where('status', 'tersedia')->get();
+        return view('auth.register', compact('availableRooms'));
     }
 
     /**
@@ -32,30 +32,27 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        // dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', 'in:user,admin'],
             'no_hp' => ['required', 'string', 'max:15'],
-            'kamar_id' => ['nullable', 'exists:kamar,id'],
+            'kamar_id' => ['required', 'exists:kamar,id'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role,
+            'role' => 'user', // Force user role
             'no_hp' => $request->no_hp,
-            'kamar_id' => $request->role === 'user' ? $request->id_kamar : null,
+            'kamar_id' => $request->kamar_id,
         ]);
 
-        $kamar = kamar::find($request->kamar_id);
-        if ($kamar && $request->role === 'user') {
-            $kamar->status = 'penuh';
-            $kamar->save();
-        }
+        // Update kamar status
+        $kamar = Kamar::find($request->kamar_id);
+        $kamar->status = 'penuh';
+        $kamar->save();
 
         event(new Registered($user));
 

@@ -45,6 +45,7 @@ class TambahTagihanBulanan extends Command
                 'jumlah_tagihan' => $amount,
                 'status_pembayaran' => 'belum_bayar',
             ]);
+            $this->output->progressAdvance();
         }
         // update progres bar
         $this->output->progressFinish();
