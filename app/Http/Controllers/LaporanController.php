@@ -12,7 +12,11 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        $laporans = laporan::with('user')->get();
+        $laporans = Laporan::with('user')
+                    ->where('user_id', auth()->id()) // Only show current user's reports
+                    ->orderBy('tanggal_laporan', 'desc')
+                    ->paginate(10); // Use paginate instead of get()
+        
         return view('laporan.index', compact('laporans'));
     }
 
@@ -32,13 +36,13 @@ class LaporanController extends Controller
         // Validate the incoming request data
         $data = $request->validate([
             'media' => 'required|mimes:jpeg,png,jpg,gif,mp4,avi,mov,wmv|max:20480',
-            'tanggal_laporan' => 'required|date',
             'deskripsi' => 'required|string|max:255',
-            'status_laporan' => 'required|in:proses,selesai',
         ]);
 
-        // Attach the currently authenticated user's ID
-        $data['user_id'] = auth()->id();
+        // Set additional fields for the laporan
+        $data['user_id'] = auth()->id(); // Set the authenticated user's ID
+        $data['tanggal_laporan'] = now()->format('Y-m-d'); // Set current date as laporan date
+        $data['status_laporan'] = 'proses'; // Default status for new reports
         // Handle file upload if media is present
         if ($request->hasFile('media')) {
             $file = $request->file('media');
@@ -70,7 +74,7 @@ class LaporanController extends Controller
      */
     public function show(laporan $laporan)
     {
-        //
+        return view('laporan.show', compact('laporan'));
     }
 
     /**
