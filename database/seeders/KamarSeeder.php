@@ -25,7 +25,7 @@ class KamarSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         // Buat 20 kamar dengan nomor 1 sampai 20 dan status 'tersedia'
-        for($i=1; $i<=20; $i++){
+        for($i=1; $i<=10; $i++){
             kamar::create([
             'nomor_kamar' => $i,
             'status' => 'tersedia',

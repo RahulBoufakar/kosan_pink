@@ -48,7 +48,7 @@ class User extends Authenticatable
 
     public function kamar()
     {
-        return $this->belongsTo(Kamar::class, 'id_kamar');
+        return $this->belongsTo(Kamar::class, 'kamar_id');
     }
 
     public function tagihan(){

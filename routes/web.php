@@ -48,6 +48,5 @@ Route::middleware('auth')->group(function () {
         Route::get('/{tagihan}/checkout', [PaymentController::class, 'checkout'])->name('payments.checkout');
         Route::post('/{tagihan}/pay', [PaymentController::class, 'pay'])->name('payments.pay');
         Route::get('/{payment}/receipt', [PaymentController::class, 'receipt'])->name('payments.receipt');
-        Route::post('/callback', [PaymentController::class, 'callback'])->name('payments.callback');
     });
 });

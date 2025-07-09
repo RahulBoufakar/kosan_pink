@@ -44,6 +44,11 @@
                         <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-50 items-center">
                             <i class="fas fa-user-circle mr-2"></i> Profil
                         </a>
+                        @if(Auth::user()->role === 'admin')
+                            <a href="{{ url('/admin') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-50 items-center">
+                                <i class="fas fa-tools mr-2"></i> Admin Panel
+                            </a>
+                        @endif
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-pink-50 items-center">
