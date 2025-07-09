@@ -37,13 +37,13 @@
                         {{ Str::limit($laporan->deskripsi, 50) }}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        @if($laporan->status_laporan == 'proses')
-                            <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                                <i class="fas fa-clock mr-1"></i> Dalam Proses
+                        @if($laporan->status_laporan == 'Proses')
+                            <span class="px-3 py-1 inline-flex items-center text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                <i class="fas fa-clock mr-1" style="vertical-align: middle;"></i> Dalam Proses
                             </span>
                         @else
-                            <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                <i class="fas fa-check-circle mr-1"></i> Selesai
+                            <span class="px-3 py-1 inline-flex items-center text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                <i class="fas fa-check-circle mr-1" style="vertical-align: middle;"></i> Selesai
                             </span>
                         @endif
                     </td>

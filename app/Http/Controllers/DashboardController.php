@@ -12,7 +12,7 @@ class DashboardController extends Controller
     {
         // Get counts instead of full records
         $unpaidBillsCount = Tagihan::where('user_id', Auth::id())
-            ->where('status_pembayaran', 'belum_bayar')
+            ->where('status', 'pending')
             ->count();
 
         $unfinishedReportsCount = Laporan::where('user_id', Auth::id())

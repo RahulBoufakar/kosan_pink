@@ -43,7 +43,7 @@ class TambahTagihanBulanan extends Command
                 'user_id' => $user->id,
                 'tanggal_tagihan' => now()->format('Y-m-d'),
                 'jumlah_tagihan' => $amount,
-                'status_pembayaran' => 'belum_bayar',
+                'status' => 'pending',
             ]);
             $this->output->progressAdvance();
         }
@@ -54,7 +54,7 @@ class TambahTagihanBulanan extends Command
         $this->info('Tagihan bulanan berhasil ditambahkan untuk semua user.');
         $this->info("Jumlah tagihan: Rp " . number_format($amount, 0, ',', '.'));
         $this->info("Tanggal tagihan: " . now()->format('Y-m-d'));
-        $this->info("Status pembayaran: belum_bayar");
+        $this->info("Status pembayaran: Pending");
     }
 
 }

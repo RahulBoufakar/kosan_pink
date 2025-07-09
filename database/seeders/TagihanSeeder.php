@@ -18,7 +18,7 @@ class TagihanSeeder extends Seeder
                 'user_id' => 2,
                 'tanggal_tagihan' => now()->format('Y-m-d'),
                 'jumlah_tagihan' => 450000,
-                'status_pembayaran' => 'belum_bayar'
+                'status' => 'pending'
             ]);
         }
 

@@ -29,14 +29,16 @@
                         <div>
                             <p class="text-sm text-gray-500">Status</p>
                             <p class="mt-1">
-                                @if($laporan->status_laporan == 'proses')
-                                    <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                                        <i class="fas fa-clock mr-1"></i> Dalam Proses
-                                    </span>
+                                @if($laporan->status_laporan == 'Proses')
+                                <span class="px-3 py-1 inline-flex items-center text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                    <i class="fas fa-clock mr-1"></i>
+                                    <span>Dalam Proses</span>
+                                </span>
                                 @else
-                                    <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                        <i class="fas fa-check-circle mr-1"></i> Selesai
-                                    </span>
+                                <span class="px-3 py-1 inline-flex items-center text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                    <i class="fas fa-check-circle mr-1"></i>
+                                    <span>Selesai</span>
+                                </span>
                                 @endif
                             </p>
                         </div>

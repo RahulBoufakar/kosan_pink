@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 use App\Models\kamar;
 use App\Models\User;
 use App\Models\laporan;
+use App\Models\tagihan;
+use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
 // use App\Models\Tagihan;
 
@@ -22,8 +24,10 @@ class DatabaseSeeder extends Seeder
         // Disable foreign key checks to avoid constraint violations during truncation
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         laporan::truncate();
+        tagihan::truncate();
         User::truncate();
         Kamar::truncate();
+        Payment::truncate();
         // Tagihan::truncate();
         //Enable foreign key checks again
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
@@ -33,8 +37,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             KamarSeeder::class,
             UserSeeder::class,
-            // LaporanSeeder::class,
             // TagihanSeeder::class,
+
+            // LaporanSeeder::class,
         ]);
     }
 }

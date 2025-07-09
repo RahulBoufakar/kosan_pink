@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\TagihanController;
@@ -36,3 +37,17 @@ require __DIR__.'/auth.php';
 Route::resource('/kamar', KamarController::class)->middleware('auth');
 Route::resource('/laporan', LaporanController::class);
 Route::resource('/tagihan', TagihanController::class)->only(['index', 'show'])->middleware('auth');
+
+// routes/web.php
+Route::middleware('auth')->group(function () {
+    // Tagihan Routes
+    Route::get('/tagihan', [TagihanController::class, 'index'])->name('tagihan.index');
+    
+    // Payment Routes
+    Route::prefix('payments')->group(function () {
+        Route::get('/{tagihan}/checkout', [PaymentController::class, 'checkout'])->name('payments.checkout');
+        Route::post('/{tagihan}/pay', [PaymentController::class, 'pay'])->name('payments.pay');
+        Route::get('/{payment}/receipt', [PaymentController::class, 'receipt'])->name('payments.receipt');
+        Route::post('/callback', [PaymentController::class, 'callback'])->name('payments.callback');
+    });
+});

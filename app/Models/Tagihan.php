@@ -1,24 +1,28 @@
 <?php
 
+// app/Models/Tagihan.php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Tagihan extends Model
 {
-    use HasFactory;
-
-    protected $table = 'tagihan';
-
     protected $fillable = [
-        'user_id',
+        'user_id', 
         'tanggal_tagihan',
         'jumlah_tagihan',
-        'status_pembayaran',
+        'status'
     ];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
+    }
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
     }
 }

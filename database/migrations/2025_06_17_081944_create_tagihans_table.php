@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tagihan', function (Blueprint $table) {
+        Schema::create('tagihans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->date('tanggal_tagihan');
             $table->decimal('jumlah_tagihan', 10, 2);
-            $table->enum('status_pembayaran', ['belum_bayar', 'sudah_bayar'])->default('belum_bayar');
+            $table->enum('status', ['pending', 'paid', 'failed', 'expired'])->default('pending');
             $table->timestamps();
         });
     }
