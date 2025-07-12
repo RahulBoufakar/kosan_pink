@@ -24,17 +24,6 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-users';
 
-    public function afterSave(Model $record): void
-    {
-        // Check if user has a kamar assigned
-        if ($record->kamar_id) {
-            $kamar = kamar::find($record->kamar_id);
-            if ($kamar && $kamar->status === 'tersedia') {
-                $kamar->update(['status' => 'penuh']);
-            }
-        }
-    }
-
     public static function form(Form $form): Form
     {
         return $form
@@ -48,11 +37,11 @@ class UserResource extends Resource
                     ->maxLength(255),
                 TextInput::make('password')
                     ->password()
-                    // ->required()
+                    ->visibleOn('create')
                     ->maxLength(255),
                 TextInput::make('password-confirmation')
                     ->password()
-                    // ->required()
+                    ->visibleOn('create')
                     ->maxLength(255),
                 TextInput::make('no_hp')
                     ->maxLength(255),
