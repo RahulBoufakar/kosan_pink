@@ -24,8 +24,4 @@ class laporan extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getStatusLaporanAttribute($value)
-    {
-        return $value === 'proses' ? 'Proses' : 'Selesai';
-    }
 }

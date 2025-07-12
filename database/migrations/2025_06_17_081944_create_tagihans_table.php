@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->date('tanggal_tagihan');
             $table->decimal('jumlah_tagihan', 10, 2);
-            $table->enum('status', ['pending', 'paid', 'failed', 'expired'])->default('pending');
+            $table->enum('status', ['pending', 'paid', 'failed', 'expired','pending_verification'])->default('pending');
             $table->timestamps();
         });
     }

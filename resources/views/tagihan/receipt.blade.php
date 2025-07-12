@@ -26,7 +26,7 @@
                     </div>
                     <div>
                         <p class="text-sm text-gray-500">Metode Pembayaran</p>
-                        <p class="font-medium capitalize">{{ $payment->payment_method }}</p>
+                        <p class="font-medium capitalize">{{ $payment->payment_type }}</p>
                     </div>
                     <div>
                         <p class="text-sm text-gray-500">Status</p>

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('tagihan_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('snap_token');
+            $table->string('snap_token')->nullable();
             $table->string('order_id');
             $table->string('payment_type')->nullable();
             $table->string('transaction_id')->nullable();

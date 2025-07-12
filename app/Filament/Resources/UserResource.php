@@ -36,11 +36,11 @@ class UserResource extends Resource
                     ->maxLength(255),
                 TextInput::make('password')
                     ->password()
-                    ->required()
+                    // ->required()
                     ->maxLength(255),
                 TextInput::make('password-confirmation')
                     ->password()
-                    ->required()
+                    // ->required()
                     ->maxLength(255),
                 TextInput::make('no_hp')
                     ->maxLength(255),
@@ -53,6 +53,7 @@ class UserResource extends Resource
                     ->default(fn ($record) => $record?->role),
                 Select::make('kamar_id')
                     ->label('Kamar')
+                    ->default(fn($record)=> $record?->nomor_kamar)
                     ->relationship('kamar', 'nomor_kamar', function (Builder $query){
                         return $query->where('status', 'tersedia');
                     })
@@ -86,6 +87,7 @@ class UserResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('kamar.nomor_kamar')
                     ->label('Kamar')
+                    ->searchable()
                     ->sortable(),
             ])
             ->filters([

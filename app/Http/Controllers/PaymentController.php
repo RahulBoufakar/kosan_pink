@@ -27,7 +27,7 @@ class PaymentController extends Controller
         $payment = $tagihan->payment ?? Payment::create([
             'tagihan_id' => $tagihan->id,
             'user_id' => auth()->id(),
-            'order_id' => 'TAGIHAN-'.$tagihan->id.'-'.Carbon::now()->format('Ymd'),
+            'order_id' => 'MIDTRANS-'.$tagihan->id.'-'.Carbon::now()->format('Ymd'),
             'snap_token' => '',
             'payment_type' => null,
             'transaction_id' => null,
@@ -105,15 +105,13 @@ class PaymentController extends Controller
             abort(403);
         }
 
-        // Ensure payment is completed
-        if (!$payment->paid_at) {
-            return redirect()->route('payments.checkout', $payment->tagihan)
-                ->with('error', 'Payment not completed yet.');
-        }
+        // Load relationships
+        $payment->load('tagihan.user');
 
         return view('tagihan.receipt', [
             'payment' => $payment,
-            'tagihan' => $payment->tagihan
+            'tagihan' => $payment->tagihan,
+            'isManual' => $payment->payment_type === 'manual_transfer'
         ]);
     }
 }

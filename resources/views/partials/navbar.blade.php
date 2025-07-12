@@ -1,11 +1,20 @@
 <nav class="bg-white shadow-md sticky top-0 z-50">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <!-- Hamburger Menu (Mobile Only) -->
+        <div class="md:hidden flex items-center">
+            <button id="mobile-menu-button" class="text-gray-700 hover:text-pink-600 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        
         <!-- Logo -->
         <div class="text-2xl font-bold text-pink-600">
             <a href="{{ url('/') }}">Kosan Pink</a>
         </div>
         
-        <!-- Navigation Links -->
+        <!-- Navigation Links (Desktop) -->
         <div class="hidden md:flex space-x-6">
             @auth
                 <!-- Authenticated User Links -->
@@ -65,4 +74,41 @@
             @endauth
         </div>
     </div>
+    
+    <!-- Mobile Menu (Hidden by default) -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white pb-3 px-4">
+        <div class="flex flex-col space-y-3">
+            @auth
+                <!-- Authenticated User Links -->
+                <a href="{{ route('dashboard') }}" class="text-gray-700 hover:text-pink-600 transition flex items-center">
+                    <i class="fas fa-home mr-2"></i> Dashboard
+                </a>
+                <a href="{{ route('tagihan.index') }}" class="text-gray-700 hover:text-pink-600 transition flex items-center">
+                    <i class="fas fa-receipt mr-2"></i> Tagihan
+                </a>
+                <a href="{{ route('laporan.index') }}" class="text-gray-700 hover:text-pink-600 transition flex items-center">
+                    <i class="fas fa-flag mr-2"></i> Laporan
+                </a>
+            @else
+                <!-- Guest Links (Landing Page Only) -->
+                <a href="{{ url('/') }}#fasilitas" class="text-gray-700 hover:text-pink-600 transition flex items-center">
+                    <i class="fas fa-home mr-2"></i> Fasilitas
+                </a>
+                <a href="{{ url('/') }}#kontak" class="text-gray-700 hover:text-pink-600 transition flex items-center">
+                    <i class="fas fa-phone mr-2"></i> Kontak Kami
+                </a>
+            @endauth
+        </div>
+    </div>
 </nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
+    });
+</script>
