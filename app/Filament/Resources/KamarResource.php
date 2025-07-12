@@ -23,16 +23,7 @@ class KamarResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-home';
 
-    public function afterStatusUpdate(Model $record): void
-    {
-        $user = User::where('id', $record->user->id);
-        if($record->status === 'tersedia'){
-            $user->delete();
-        }   
-        // Runs after both create and update
-        $this->logActivity();
-    }
-
+    
     public static function form(Form $form): Form
     {
         return $form
@@ -44,10 +35,10 @@ class KamarResource extends Resource
                     ->options([
                         'tersedia' => 'Tersedia',
                         'penuh' => 'Penuh',
+                        'diperbaiki' => 'Diperbaiki',
                     ])
                     ->label('Status Kamar')
-                    ->required()
-                    ->default(fn($record) => $record?->status),
+                    ->required(),
             ]);
     }
 
@@ -87,7 +78,6 @@ class KamarResource extends Resource
                 ]),
             ]);
     }
-
 
     public static function getRelations(): array
     {

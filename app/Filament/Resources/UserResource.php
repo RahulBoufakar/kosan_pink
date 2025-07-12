@@ -11,6 +11,7 @@ use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
@@ -22,6 +23,17 @@ class UserResource extends Resource
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-s-users';
+
+    public function afterSave(Model $record): void
+    {
+        // Check if user has a kamar assigned
+        if ($record->kamar_id) {
+            $kamar = kamar::find($record->kamar_id);
+            if ($kamar && $kamar->status === 'tersedia') {
+                $kamar->update(['status' => 'penuh']);
+            }
+        }
+    }
 
     public static function form(Form $form): Form
     {
@@ -53,9 +65,15 @@ class UserResource extends Resource
                     ->default(fn ($record) => $record?->role),
                 Select::make('kamar_id')
                     ->label('Kamar')
-                    ->default(fn($record)=> $record?->nomor_kamar)
-                    ->relationship('kamar', 'nomor_kamar', function (Builder $query){
-                        return $query->where('status', 'tersedia');
+                    ->options(function () {
+                        return kamar::query()
+                            ->where('status', 'tersedia')
+                            ->pluck('nomor_kamar', 'id')
+                            ->toArray();
+                    })
+                    ->searchable()
+                    ->getOptionLabelUsing(function ($value): ?string {
+                        return kamar::find($value)?->nomor_kamar;
                     })
             ])->columns(1);
     }
@@ -89,9 +107,14 @@ class UserResource extends Resource
                     ->label('Kamar')
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('deleted_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make()
+                    ->label('Deleted Users'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

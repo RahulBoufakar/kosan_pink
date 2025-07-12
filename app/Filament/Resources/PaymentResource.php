@@ -40,14 +40,6 @@ class PaymentResource extends Resource
         return false;
     }
 
-    protected function afterSave(Model $record): void
-    {
-        $tagihan = Tagihan::where('id', $record->tagihan->id);
-        $tagihan->update(['status' => 'paid']);
-        // Runs after both create and update
-        $this->logActivity();
-    }
-
     public static function form(Form $form): Form
     {
         return $form
