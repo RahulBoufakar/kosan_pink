@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\laporan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LaporanController extends Controller
 {
@@ -104,6 +105,11 @@ class LaporanController extends Controller
             $extension = $file->getClientOriginalExtension();
             $allowedImage = ['jpeg', 'png', 'jpg', 'gif'];
             $allowedVideo = ['mp4', 'avi', 'mov', 'wmv'];
+
+            //Delete old file
+            if ($laporan->media) {
+                Storage::disk('public')->delete($file->getRealPath());
+            }
 
             if (in_array(strtolower($extension), $allowedImage)) {
                 // Store image files

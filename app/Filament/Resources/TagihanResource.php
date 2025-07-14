@@ -48,9 +48,14 @@ class TagihanResource extends Resource
         return false;
     }
 
-
-
-
+    // Add this method to exclude soft-deleted users
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->whereHas('user', function (Builder $query) {
+                $query->whereNull('deleted_at');
+            });
+    }
 
     public static function form(Form $form): Form
     {

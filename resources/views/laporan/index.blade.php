@@ -82,22 +82,22 @@
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-pink-50">
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-pink-600 uppercase tracking-wider">Tanggal</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-pink-600 uppercase tracking-wider">Deskripsi</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-pink-600 uppercase tracking-wider">Status</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-pink-600 uppercase tracking-wider">Aksi</th>
+                    <th class="px-6 py-3 text-center text-xs font-medium text-pink-600 uppercase tracking-wider">Tanggal</th>
+                    <th class="px-6 py-3 text-center text-xs font-medium text-pink-600 uppercase tracking-wider">Deskripsi</th>
+                    <th class="px-6 py-3 text-center text-xs font-medium text-pink-600 uppercase tracking-wider">Status</th>
+                    <th class="px-6 py-3 text-center text-xs font-medium text-pink-600 uppercase tracking-wider">Aksi</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
                 @forelse($laporans as $laporan)
                 <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-600">
                         {{ \Carbon\Carbon::parse($laporan->tanggal_laporan)->translatedFormat('d F Y H:i') }}
                     </td>
-                    <td class="px-6 py-4 text-sm text-gray-600">
+                    <td class="px-6 py-4 text-sm text-center text-gray-600">
                         {{ Str::limit($laporan->deskripsi, 50) }}
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
+                    <td class="px-6 py-4 whitespace-nowrap text-center">
                         @if($laporan->status_laporan == 'proses')
                             <span class="px-3 py-1 inline-flex items-center text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
                                 <i class="fas fa-clock mr-1"></i> Dalam Proses
@@ -108,7 +108,7 @@
                             </span>
                         @endif
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-center">
                         <a href="{{ route('laporan.show', $laporan->id) }}" class="text-pink-600 hover:text-pink-900 mr-3">
                             <i class="fas fa-eye mr-1"></i> Lihat
                         </a>

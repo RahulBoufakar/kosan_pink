@@ -72,22 +72,22 @@
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-pink-50">
                 <tr>
-                    <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-pink-600 uppercase tracking-wider">Tanggal</th>
-                    <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-pink-600 uppercase tracking-wider">Jumlah</th>
-                    <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-pink-600 uppercase tracking-wider">Status</th>
-                    <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-pink-600 uppercase tracking-wider">Aksi</th>
+                    <th class="px-4 sm:px-6 py-3 text-center text-xs font-medium text-pink-600 uppercase tracking-wider">Tanggal</th>
+                    <th class="px-4 sm:px-6 py-3 text-center text-xs font-medium text-pink-600 uppercase tracking-wider">Jumlah</th>
+                    <th class="px-4 sm:px-6 py-3 text-center text-xs font-medium text-pink-600 uppercase tracking-wider">Status</th>
+                    <th class="px-4 sm:px-6 py-3 text-center text-xs font-medium text-pink-600 uppercase tracking-wider">Aksi</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
                 @forelse($tagihans as $tagihan)
                 <tr>
-                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-600 text-center">
                         {{ \Carbon\Carbon::parse($tagihan->tanggal_tagihan)->translatedFormat('d M Y') }}
                     </td>
-                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-600 text-center">
                         Rp {{ number_format($tagihan->jumlah_tagihan, 0, ',', '.') }}
                     </td>
-                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap">
+                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-center">
                         @if($tagihan->status == 'paid')
                             <span class="px-2 sm:px-3 py-1 inline-flex items-center text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                 <i class="fas fa-check-circle mr-1"></i> <span class="sm:inline">Lunas</span>
@@ -98,13 +98,13 @@
                             </span>
                         @endif
                     </td>
-                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-center">
                         @if($tagihan->status == 'pending')
-                            <a href="{{ route('payments.checkout', $tagihan) }}" class="text-pink-600 hover:text-pink-900 flex items-center">
+                            <a href="{{ route('payments.checkout', $tagihan) }}" class="text-pink-600 hover:text-pink-900 flex items-center justify-center">
                                 <i class="fas fa-money-bill-wave mr-1"></i> <span class="sm:inline">Bayar</span>
                             </a>
                         @else
-                            <a href="{{ route('payments.receipt', $tagihan->payment) }}" class="text-blue-600 hover:text-blue-900 flex items-center">
+                            <a href="{{ route('payments.receipt', $tagihan->payment) }}" class="text-blue-600 hover:text-blue-900 flex items-center justify-center">
                                 <i class="fas fa-receipt mr-1"></i> <span class="sm:inline">Resi</span>
                             </a>
                         @endif

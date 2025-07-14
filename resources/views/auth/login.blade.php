@@ -26,7 +26,7 @@
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500"
                         value="{{ old('email') }}">
                     @error('email')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        <p class="mt-1 text-sm text-red-600">Alamat email atau password tidak valid</p>
                     @enderror
                 </div>
 
@@ -36,7 +36,7 @@
                     <input id="password" name="password" type="password" required
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500">
                     @error('password')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        <p class="mt-1 text-sm text-red-600">Alamat email atau Password tidak valid</p>
                     @enderror
                 </div>
 

@@ -41,6 +41,7 @@ class UserSeeder extends Seeder
                 'name' => 'User ' . $i,
                 'email' => 'user' . $i . '@example.com',
                 'password' => bcrypt('password'),
+                'email_verified_at' => now(),
                 'role' => 'user',
                 'no_hp' => '08123456789' . $i,
                 'kamar_id' => kamar::where('status', 'tersedia')->first()->id,

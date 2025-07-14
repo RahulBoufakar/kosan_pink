@@ -27,10 +27,6 @@
                 <a href="{{ route('laporan.index') }}" class="text-gray-700 hover:text-pink-600 transition flex items-center">
                     <i class="fas fa-flag mr-1"></i> Laporan
                 </a>
-            @else
-                <!-- Guest Links (Landing Page Only) -->
-                <a href="{{ url('/') }}#fasilitas" class="text-gray-700 hover:text-pink-600 transition">Fasilitas</a>
-                <a href="{{ url('/') }}#kontak" class="text-gray-700 hover:text-pink-600 transition">Kontak Kami</a>
             @endauth
         </div>
         
@@ -68,8 +64,12 @@
                 </div>
             @else
                 <!-- Login Button -->
-                <a href="{{ route('login') }}" class="px-4 py-2 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition duration-300">
+                <a href="{{ route('login') }}" class="block w-full px-4 py-2 mx-2 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition duration-300 my-2">
                     Login
+                </a>
+                <!-- Register Button -->
+                <a href="{{ route('register') }}" class="block w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300">
+                    Register
                 </a>
             @endauth
         </div>
@@ -94,9 +94,9 @@
                 <a href="{{ url('/') }}#fasilitas" class="text-gray-700 hover:text-pink-600 transition flex items-center">
                     <i class="fas fa-home mr-2"></i> Fasilitas
                 </a>
-                <a href="{{ url('/') }}#kontak" class="text-gray-700 hover:text-pink-600 transition flex items-center">
+                {{-- <a href="{{ url('/') }}#kontak" class="text-gray-700 hover:text-pink-600 transition flex items-center">
                     <i class="fas fa-phone mr-2"></i> Kontak Kami
-                </a>
+                </a> --}}
             @endauth
         </div>
     </div>

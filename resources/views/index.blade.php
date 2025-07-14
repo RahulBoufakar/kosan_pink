@@ -21,9 +21,6 @@
                     <a href="#fasilitas" class="px-6 py-3 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition duration-300 text-center">
                         Lihat Fasilitas
                     </a>
-                    <a href="#kontak" class="px-6 py-3 border border-pink-600 text-pink-600 rounded-md hover:bg-pink-50 transition duration-300 text-center">
-                        Hubungi Kami
-                    </a>
                 </div>
             </div>
             <div class="md:w-1/2">
@@ -54,41 +51,14 @@
                     <h3 class="text-xl font-semibold mb-2">Dapur Bersama</h3>
                     <p class="text-gray-600">Dapur lengkap yang bisa digunakan bersama oleh semua penghuni kos.</p>
                 </div>
-                
                 <!-- Fasilitas 3 -->
                 <div class="bg-pink-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
                     <div class="text-pink-600 text-4xl mb-4">
-                        <i class="fas fa-tshirt"></i>
+                        <i class="fas fa-toilet"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Laundry</h3>
-                    <p class="text-gray-600">Layanan laundry dengan harga khusus untuk penghuni kos.</p>
+                    <h3 class="text-xl font-semibold mb-2">Kamar Mandi Bersama 2</h3>
+                    <p class="text-gray-600">Kamar mandi yang selalu dibersihkan dan diwangi setiap hari.</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Kontak Section -->
-    <section id="kontak" class="py-16 bg-pink-100">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Hubungi Kami</h2>
-            <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
-                <form>
-                    <div class="mb-4">
-                        <label for="nama" class="block text-gray-700 mb-2">Nama</label>
-                        <input type="text" id="nama" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500">
-                    </div>
-                    <div class="mb-4">
-                        <label for="email" class="block text-gray-700 mb-2">Email</label>
-                        <input type="email" id="email" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500">
-                    </div>
-                    <div class="mb-4">
-                        <label for="pesan" class="block text-gray-700 mb-2">Pesan</label>
-                        <textarea id="pesan" rows="4" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-pink-600 text-white py-3 rounded-md hover:bg-pink-700 transition duration-300">
-                        Kirim Pesan
-                    </button>
-                </form>
             </div>
         </div>
     </section>

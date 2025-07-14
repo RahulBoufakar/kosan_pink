@@ -23,6 +23,7 @@ use Filament\Forms\Components\DateTimePicker;
 use App\Filament\Resources\LaporanResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\LaporanResource\RelationManagers;
+use Filament\Tables\Columns\SelectColumn;
 
 class LaporanResource extends Resource
 {
@@ -47,7 +48,7 @@ class LaporanResource extends Resource
                     ->disk('public')
                     ->directory('laporan_media/images')
                     ->visibility('public')
-                    ->columnSpan('full'),
+                    ->columnSpanFull(),
                 DateTimePicker::make('tanggal_laporan')
                     ->required()
                     ->readonly(),
@@ -82,7 +83,12 @@ class LaporanResource extends Resource
                     ->sortable(),
                 TextColumn::make('deskripsi')
                     ->searchable(),
-                TextColumn::make('status_laporan'),
+                SelectColumn::make('status_laporan')
+                    ->label('Status Laporan')
+                    ->options([
+                        'proses' => 'Proses',
+                        'selesai' => 'Selesai'
+                    ]),
                 TextColumn::make('user_id')
                     ->numeric()
                     ->sortable(),

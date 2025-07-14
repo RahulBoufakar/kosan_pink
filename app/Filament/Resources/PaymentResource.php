@@ -47,10 +47,14 @@ class PaymentResource extends Resource
                 Select::make('tagihan_id')
                     ->label('Tagihan')
                     ->relationship('tagihan', 'id', function (Builder $query) {
-                        return $query->where('status', 'pending');
+                        return $query
+                            ->where('status', 'pending')
+                            ->whereHas('user', function (Builder $query) {
+                                return $query->withoutTrashed();
+                            });
                     })
                     ->getOptionLabelFromRecordUsing(fn ($record) =>
-                        $record->user->name . ' - ' . Carbon::parse($record->tanggal_tagihan)->format('F Y')
+                        $record->user ? $record->user->name . ' - ' . Carbon::parse($record->tanggal_tagihan)->format('F Y') : ''
                     )
                     ->searchable()
                     ->preload()
@@ -73,10 +77,6 @@ class PaymentResource extends Resource
                     ->label("User ID")
                     ->readonly()
                     ->required(),
-
-                TextInput::make('status')
-                    ->label('Status Tagihan')
-                    ->readonly(),
 
                 TextInput::make('bulan_tagih')
                     ->label('Bulan Tagih')
@@ -118,6 +118,7 @@ class PaymentResource extends Resource
                     ->searchable(),
 
                 TextColumn::make('transaction_id')
+                    ->label('ID Transaksi')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
 
