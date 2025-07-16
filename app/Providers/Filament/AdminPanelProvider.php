@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Widgets\MonthlyRevenueChart;
+use App\Http\Middleware\AdminMiddleware;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
@@ -53,6 +54,7 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                AdminMiddleware::class,
             ])
             ->authMiddleware([
                 Authenticate::class,

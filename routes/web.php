@@ -34,12 +34,14 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 
 require __DIR__.'/auth.php';
 
-Route::resource('/kamar', KamarController::class)->middleware('auth');
-Route::resource('/laporan', LaporanController::class);
-Route::resource('/tagihan', TagihanController::class)->only(['index', 'show'])->middleware('auth');
-
 // routes/web.php
 Route::middleware('auth')->group(function () {
+    // Kamar Routes
+    Route::resource('/kamar', KamarController::class);
+    
+    // Laporan Routes
+    Route::resource('/laporan', LaporanController::class);
+    
     // Tagihan Routes
     Route::get('/tagihan', [TagihanController::class, 'index'])->name('tagihan.index');
     
