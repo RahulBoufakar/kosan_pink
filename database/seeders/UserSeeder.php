@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
         }
 
         // Buat user sesuai dengan jumlah kamar yang tersedia
-        for ($i = 1; $i <= $count_kamar_tersedia; $i++) {
+        for ($i = 1; $i <= $count_kamar_tersedia; $i+=2) {
             User::create([
                 'name' => 'User ' . $i,
                 'email' => 'user' . $i . '@example.com',

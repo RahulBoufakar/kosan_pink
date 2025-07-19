@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Filters\DateTimeRangeFilter;
 use App\Filament\Resources\PaymentResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PaymentResource\RelationManagers;
@@ -150,6 +151,19 @@ class PaymentResource extends Resource
                     ->searchable()
                     ->multiple()
                     ->preload(),
+                    Filter::make('paid_at_range')
+                        ->label('Rentang Pembayaran')
+                        ->form([
+                            DateTimePicker::make('from')->label('Dari'),
+                            DateTimePicker::make('until')->label('Sampai'),
+                        ])
+                        ->query(function ($query, array $data) {
+                            return $query
+                                ->when($data['from'], fn ($q) => $q->where('paid_at', '>=', $data['from']))
+                                ->when($data['until'], fn ($q) => $q->where('paid_at', '<=', $data['until']));
+                        }),
+
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

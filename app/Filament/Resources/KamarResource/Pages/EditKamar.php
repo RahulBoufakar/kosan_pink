@@ -22,7 +22,7 @@ class EditKamar extends EditRecord
 
     protected function afterSave(): void
     {
-        $record = $this->getRecord();
+        $record = $this->record;
         
         // If kamar changed from penuh → tersedia
         if ($this->oldStatus === 'penuh' && $record->status === 'tersedia') {
@@ -34,7 +34,7 @@ class EditKamar extends EditRecord
             }
         }
     }
-    
+
     protected function getHeaderActions(): array
     {
         return [

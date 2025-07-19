@@ -17,6 +17,6 @@ class kamar extends Model
     ];
 
     public function user(){
-        return $this->hasMany(User::class, 'kamar_id');
+        return $this->hasOne(User::class, 'kamar_id');
     }
 }

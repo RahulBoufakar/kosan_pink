@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\kamar;
+use App\Observers\KamarObserver;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        kamar::observe(KamarObserver::class);
         // URL::forceScheme('https');
     }
 }
